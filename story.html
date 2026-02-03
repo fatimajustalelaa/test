@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>part 1 </title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0d0d12;
+    color: #f2f2f2;
+    font-family: Tahoma, Arial;
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 650px;
+    background-color: #1a1a26;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.scene {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    animation: fade 0.6s ease;
+}
+
+p {
+    font-size: 17px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+    animation: fade 0.6s ease;
+}
+
+/* ===== تأثير الأزرار ===== */
+button {
+    padding: 12px 26px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #6c8ebf, #4f6fa5); /* لون متدرج */
+    color: #fff;
+    font-weight: bold;
+    transition: 0.25s ease, transform 0.2s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* لما تمر الفأرة على الزر */
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+    background: linear-gradient(135deg, #5a7fb3, #3b5f8f);
+}
+
+/* لما تضغط الزر */
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4) inset;
+    background: linear-gradient(135deg, #4f6fa5, #3b5f8f);
+}</style>
+</head>
+
+
+<body>
+
+<div class="container">
+    <img id="scene" class="scene" src="seeu.png">
+
+    <p id="text">
+        الساعة 1:47 فجرًا.<br>
+        هاتفك يضيء بإشعار غريب من تطبيق لم تحمله مسبقا على جهازك:<br><br>
+        «نحن نراك الآن.»
+    </p>
+
+    <div id="choices">
+        <button onclick="lookBack()">تنظر خلفك</button>
+        <button onclick="closePhone()">تغلق الهاتف</button>
+    </div>
+</div>
+
+<audio id="bgMusic" src="back.MP3" loop ></audio>
+<audio id="clickSound" src="click.mp3"></audio>
+
+<script>
+function lookBack() {
+    document.getElementById("scene").src = "mirror.png";
+    document.getElementById("text").innerHTML =
+        "تلتفت ببطء…<br>الغرفة فارغة،<br>لكن انعكاسك يتأخر.";
+
+    document.getElementById("choices").innerHTML = `
+        <button onclick="badEnding()">تكسر المرآة</button>
+        <button onclick="escape()">تهرب</button>
+    `;
+}
+
+function closePhone() {
+    document.getElementById("scene").src = "phone.png";
+    document.getElementById("text").innerHTML =
+        "تغلق الهاتف…<br>اشعار اخر !<br>«قرار ذكي.»";
+
+    document.getElementById("choices").innerHTML = `
+        <button onclick="goodEnding()">تحذف التطبيق</button>
+ <button onclick="Ending()">تتركه وتنام </button>
+
+    `;
+}
+
+function badEnding() {
+    document.getElementById("scene").src = "broken_mirror.png";
+    document.getElementById("text").innerHTML =
+        "الزجاج يتحطم…<br>لكن الانعكاس لا يختفي.<br>تنزف يدك بسبب تكسر الزجاج <br><strong></strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="helth()">تحاول تضميد يدك اولا </button>
+<button onclick="run1()">تهرب خوفا</button>
+    `;
+
+}
+
+function helth() {
+    document.getElementById("scene").src = "dontrun.png";
+    document.getElementById("text").innerHTML =
+        "تذهب الى المطبخ للبحث عن ضمادات<br>كان المطبخ مقلوبا رأسا على عقب و توجد بقع دماء منتشره كوَّنت كلمه:<br><br><strong>لا تحاول الهروب ! </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="serch()">تتجاهل و تكمل البحث </button>
+<button onclick="phone()">تقرر فتح هاتفك على ذلك التطبيق</button>
+    `;
+
+}
+function serch() {
+   
+    document.getElementById("text").innerHTML =
+        "تحاول البحث في كل مكان لكن لا يمكنك فتح الادراج <br><br>بينما يستمر جهازك بأصوات و اشعارات<br><strong></strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تتفقد الهاتف </button>
+<button onclick="broke2()">تحاول كسر الدرج</button>
+    `;
+
+}
+
+function broke2() {
+    document.getElementById("scene").src = "key.png";
+    document.getElementById("text").innerHTML =
+        "ينكسر الدرج و تجد المفتاح !!<br><br> <br><strong></strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="helth2()">تحاول تضميد يدك اولا </button>
+<button onclick="run2()">تتجه نحو الباب للمغادره </button>
+    `;
+
+}
+
+function run2() {
+    document.getElementById("scene").src = "door.png";
+    document.getElementById("text").innerHTML =
+        "قفل الباب مكسور لا يمكنك فتحه !<br>مكتوب على الباب:<br> قلت لك لا تحاول الهروب !! <br><strong></strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تفتح هاتفك؟ </button>
+<button onclick="sleep()">تركض لتنام وكأن شيءاََ لم يحدث</button>
+    `;
+
+}
+
+
+function sleep() {
+    document.getElementById("scene").src = "room2.png";
+    document.getElementById("text").innerHTML =
+        "تذهب الى سريرك مرتعب من الذي حصل تحاول تجاهل كل ما تراه و رأيته <br>وسط الظلام غططت في النوم اخيرا<br>لتستيقظ على اشعار: <br><strong> سنلتقي لاحقا  </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="window.location.href='story.html'">تجربه نهايه اخرى؟ </button>
+<button onclick="window.location.href='part2.html'">part 2 ?</button>
+    `;
+
+}
+
+
+function run1() {
+    document.getElementById("scene").src = "mmr.png";
+    document.getElementById("text").innerHTML =
+        "تجري خوفا مغادرا الغرفه بينما كنت تشعر بحركه داخل منزلك و تسمع تكسير اشياء <br><br><br><strong> </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="run3()"> تخرج من المنزل  </button>
+<button onclick="police()">تتصل على الشرطه</button>
+    `;
+
+}
+
+function run3() {
+    document.getElementById("scene").src = "door2.png";
+    document.getElementById("text").innerHTML =
+        "تجري الى الباب مسرعا لتراه مقفل  <br><br> <br><strong> </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="door1()">تحاول كسر الباب </button>
+<button onclick="keys()">تبحث عن المفتاح</button>
+    `;
+
+}
+
+function door1() {
+  document.getElementById("text").innerHTML =
+        "انت اضعف من ان تكسره بيدك ! <br><br> <br><strong> </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="metal()">تبحث عن آله  </button>
+<button onclick="keys()">تحاول البحث عن مفتاح</button>
+    `;
+
+}
+
+function metal() {
+    document.getElementById("scene").src = "dontrun.png";
+    document.getElementById("text").innerHTML =
+        "تذهب الى المطبخ و تراه مقلوبا رأساََ على عقب  <br>وتوجد بقع دم كونت جمله<br><br><strong>لا تحاول الهرب!  </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="serch4()">لا تهتم و تكمل البحث  </button>
+<button onclick="phone()">تفتح هاتفك على ذلك التطبيق</button>
+
+    `;
+
+}
+
+function serch4() {
+    
+    document.getElementById("text").innerHTML =
+        "الادراج كلهه لا يمكن فتحها  <br>بينما كان الهاتف يستمر بأصدار الاصوات و الاشعارات <br> <br><strong> </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تتفقد الهاتف </button>
+<button onclick="broke3()">تحاول كسر الدرج</button>
+    `;
+
+}
+
+function broke3() {
+    document.getElementById("scene").src = "door.png";
+    document.getElementById("text").innerHTML =
+        "استطعت كسر الدرج وفتحه  <br>رائع وجدت المفتاح!<br>تنطلق للباب لفتحه لكن قفل الباب مسكور و مكتوب على الباب<br><strong>قلت لك لا تحاول الهرب!! </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تفتح الهاتف  </button>
+<button onclick="sleep()">تذهب لتنام و كأن شيءاََ لو يحدث</button>
+<button onclick="metal2()">تعود للبحث عن شيء تكسر فيه الباب </button>
+    `;
+
+}
+
+
+function metal2() {
+    document.getElementById("scene").src = "mirror2.png";
+    document.getElementById("text").innerHTML =
+        "بحثت بالمنزل بأكمله ولم تجد شيءاََ او طريقه او مفتاح  <br>تنضر بيأس متعب نحو انعكاسك في المرآه في الظلام لتراها تاره تبتسسم و تاره تضهر وجهه الذيي يلهث متعباََ <br>بينما كان الجهاز يستمر في الاشعارات<br><strong> </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تفتح الهاتف  </button>
+<button onclick="sleep()">تقرر الذهاب للنوم</button>
+    `;
+
+}
+
+
+function keys() {
+    document.getElementById("scene").src = "rooml.png";
+    document.getElementById("text").innerHTML =
+        " تعود لغرفتك للبحث عن مفاتيح  <br>فتجدها مبعثره كليا  <br>بينما كان الجهاز يستمر في الاشعارات<br><strong> </strong>";
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تفتح الهاتف  </button>
+<button onclick="keys2()">تستمر بالبحث عن المفاتيح</button>
+    `;
+
+}
+
+function keys2() {
+   
+    document.getElementById("text").innerHTML =
+        "تحاول البحث في كل مكان لكن لا يمكنك فتح الادراج <br><br>بينما يستمر جهازك بأصوات و اشعارات<br><strong></strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تفتح الهاتف  </button>
+<button onclick="broke1()">تحاول كسر الدرج</button>
+    `;
+
+}
+
+
+function broke1() {
+    document.getElementById("scene").src = "door.png";
+    document.getElementById("text").innerHTML =
+      " استطعت كسر الدرج وفتحه  <br>رائع وجدت المفتاح!<br>تنطلق للباب لفتحه لكن قفل الباب مسكور و مكتوب على الباب<br><strong> قلت لك لا تحاول الهرب!!</strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تفتح التطبيق الغريب ذلك على الهاتف   </button>
+<button onclick="sleep()">تذهب لتنام كأن شيءاََ لم يحصل </button>
+    `;
+
+}
+
+
+function helth2() {
+    document.getElementById("scene").src = "helth.png";
+    document.getElementById("text").innerHTML =
+     "تبحث فالادراج الاخرى عن ضمادات ... وجدت ضماده لكن <br>كانت هناك رساله بجانبها فتحت الرساله مكتوب:<br><br><strong> انصحك بالاستماع للاوامر ولا تحاول الهروب و.....عد لسريرك الان </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="sleep()">تستمع للنصيحه ؟</button>
+<button onclick="keys3()">تأخذ المفتاح لفتح الباب</button>
+    `;
+
+}
+
+
+
+function keys3() {
+    document.getElementById("scene").src = "door2.png";
+    document.getElementById("text").innerHTML =
+     "تجري للباب و تأخذ المفتاح لفتحه كان كسر الباب مقفول لايمكنك فتحه <br><br><br><strong> </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="sleep()">تستمع للنصيحه ؟</button>
+<button onclick="broke5()">تحاول كسر الباب ؟</button>
+
+<button onclick="phone()">تفتح الهاتف</button>
+    `;
+
+}
+
+
+function broke5() {
+   
+    document.getElementById("text").innerHTML =
+     "انت اضعف من ان تكسر الباب <br>تنضر قليلا ثم تذكر انك رأيت آله فعلا في المطبخ قد تساعدك لكسره !<br><br><strong> </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="sleep()">تستمع للنصيحه ؟</button>
+<button onclick="kichen()">تعود للمطبخ</button>
+    `;
+
+}
+
+
+
+function kichen() {
+    document.getElementById("scene").src = "metal.png";
+    document.getElementById("text").innerHTML =
+     "انها موجوده لكن ....<br>لما تكثر الدماء فالمطبخ ؟<br><br><strong> </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="sleep()">تستمع للنصيحه ؟</button>
+<button onclick="kichen2()">تأخذ الآله و تجري للباب</button>
+    `;
+
+}
+
+
+
+function kichen2() {
+    document.getElementById("scene").src = "mmq.png";
+    document.getElementById("text").innerHTML =
+     "<br>صوت صراخ يتردد في اذنك<br><br><strong>لا يمكنككك الهروب!!!!!!! </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="sleep()">تستمع للنصيحه ؟</button>
+<button onclick="kichen3()">تستمر في محاوله كسر الباب</<button>
+    `;
+
+}
+
+
+
+function kichen3() {
+   
+    document.getElementById("text").innerHTML =
+     "  <strong>لاااا لااا توقففف لااا تحاول </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="sleep()">تستمع للنصيحه ؟</button>
+<button onclick="kichen4()">تستمر </button>
+    `;
+
+}
+
+
+
+function kichen4() {
+   
+    document.getElementById("text").innerHTML =
+     "كسر الباب<br>صوت:<br><strong>خطوة وحده خارج المنزل و.... سوف تندم </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="sleep()">تستمع للنصيحه ؟</button>
+<button onclick="kichen5()">تخرج</button>
+    `;
+
+}
+
+
+
+function kichen5() {
+    document.getElementById("scene").src = "exit.png";
+    document.getElementById("text").innerHTML =
+     "   <strong> حسنا اذن لقد حذرتك </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="window.location.href='part2.html'">part 2 ?</button>
+<button onclick="window.location.href='story.html'">تجربه نهايه اخرى </button>
+    `;
+
+}
+
+
+function police() {
+    document.getElementById("scene").src = "mmr.png";
+    document.getElementById("text").innerHTML =
+     "لا يوجد خط <strong> </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="run3()">تخرج من المنزل </button>
+<button onclick="police2()">تحاول ان تهدأ وتجد حل</button>
+    `;
+
+}
+
+
+function police2() {
+    document.getElementById("scene").src = "rooml.png";
+    document.getElementById("text").innerHTML =
+     "تعود للغرفه و كانت مبعثره بالكامل <br>بكتابه على الجدار<strong>لما لا تنام ؟ </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="phone()">تفتح هاتفك </button>
+<button onclick="run3()">تحاول المغادره من المنزل </button>
+
+<button onclick="sleep()">تذهب للسرير </button>
+    `;
+
+}
+
+
+function phone() {
+    document.getElementById("scene").src = "phone3.png";
+    document.getElementById("text").innerHTML =
+     "رساله واحده <br><strong>تلعب لعبه ؟  </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="window.location.href='part2.html'">نعم </button>
+<button onclick="phone2()">لا </button>
+    `;
+
+}
+
+
+
+
+function phone2() {
+  
+    document.getElementById("text").innerHTML =
+     "<strong>تلعب لعبه ؟  </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="window.location.href='part2.html'">نعم </button>
+<button onclick="phone3()">لا </button>
+    `;
+
+}
+
+
+
+
+
+function phone3() {
+   
+    document.getElementById("text").innerHTML =
+     " <strong> العب اللعبه !! </strong>";
+
+
+    document.getElementById("choices").innerHTML = `
+    <button onclick="window.location.href='part2.html'">نعم </button>
+<button onclick="window.location.href='part2.html'">نعم </button>
+    `;
+
+}
+
+
+function escape() {
+    document.getElementById("scene").src = "mmr.png";
+    document.getElementById("text").innerHTML =
+        "الهروب لا يعني النجاة…!! <br> تركض في المنزل دون وجهه و انت ترى و تسمع اصوات و اشياء غير موجوده"
+
+    document.getElementById("choices").innerHTML = `
+      <button onclick="run3()">تخرج من المنزل </button>
+ <button onclick="police()">تتصل على الشرطه </button>
+    `;
+}
+
+function goodEnding() {
+    document.getElementById("scene").src = "phone3.png";
+    document.getElementById("text").innerHTML =
+        "لا يمكنك حذف التطبيق!! <br><br><strong></strong>";
+
+    document.getElementById("choices").innerHTML = `
+      <button onclick="sleep()">تذهب لتنام</button>
+<button onclick="goodEnding2()">تستمر بالمحاوله </button>
+    `;
+}
+
+
+
+function goodEnding2()  {
+    document.getElementById("scene").src = "seeu2.png";
+    document.getElementById("text").innerHTML =
+        "لا يمكنك حذف التطبيق!! <br>رساله جديده:<br><strong></strong>";
+
+    document.getElementById("choices").innerHTML = `
+      <button onclick="sleep()">تذهب لتنام</button>
+<button onclick="phone()">تفتح الرساله </button>
+    `;
+}
+
+
+
+function Ending() {
+    document.getElementById("scene").src = "phone2.png";
+   document.getElementById("text").innerHTML = `
+    تستيقظ على اشعار.<br>
+    "سنلتقي مرة أخرى"<br>
+    <strong></strong>
+`;
+
+    document.getElementById("choices").innerHTML = `
+       <button onclick="window.location.href='part2.html'">part 2 ?</button>
+ <button onclick="window.location.href='story.html'"> تجربه نهايه اخرى</button>
+
+    `;
+}
+
+
+// صوت عند النقر على كل الأزرار، حتى الجديدة اللي تنضاف لاحقاً
+document.body.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+        const clickSound = document.getElementById("clickSound");
+        clickSound.currentTime = 0;
+        clickSound.play();
+    }
+});
+// تشغيل موسيقى الخلفية فقط عند أول نقرة على أي مكان بالصفحة
+let bgStarted = false;
+document.body.addEventListener("click", () => {
+    const bgMusic = document.getElementById("bgMusic");
+    if (!bgStarted) {
+        bgMusic.play();
+        bgStarted = true;
+    }
+});
+</script>
+
+</body>
+</html>
+

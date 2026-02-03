@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>محاوله فقططط </title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, sans-serif;
+    background: #05070c; /* أسود ناعم مو فاحم */
+  }
+
+
+
+  /* الخلفية */
+  #welcomeScreen {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://i.pinimg.com/1200x/96/01/4c/96014ce5f71468ba96cc4e7e49859984.jpg');
+    position: relative;
+  }
+
+  /* صندوق الترحيب */
+  #infoBox {
+    width: 70%;
+    max-width: 600px;
+    background: rgba(20, 30, 50, 0.75); /* أزرق غامق شفاف */
+    color: #eef3ff; /* أبيض مائل للأزرق */
+    padding: 22px;
+    border-radius: 14px;
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  /* زر البدء */
+  #startBtn {
+    margin-top: 20px;
+    padding: 12px 28px;
+    font-size: 17px;
+    background-color: #6c8ebf; /* أزرق باهت */
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #startBtn:hover {
+    background-color: #5a7fb3;
+  }
+
+  /* أي زر ثاني */
+  button {
+    padding: 10px 22px;
+    margin: 5px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #6c8ebf;
+    color: #ffffff;
+    transition: 0.3s;
+  }
+
+ button:hover {
+  background-color: #5a7fb3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+} 
+
+#choiceScreen {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background:
+    linear-gradient(
+      rgba(5, 7, 12, 0.85),
+      rgba(5, 7, 12, 0.85)
+    ),
+    url('https://i.pinimg.com/1200x/96/01/4c/96014ce5f71468ba96cc4e7e49859984.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.infoBox {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) inset;
+}
+
+#choiceScreen .infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#choiceScreen button {
+  letter-spacing: 1px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="rating">
+
+<div id="welcomeScreen">
+  <div id="infoBox">
+    <h2>ما ستراه الآن مجرد محاولة لصناعة ألعاب قصصية</h2>
+    <p>يمكنك تجربة نهايات مختلفة</p>
+    <button id="startBtn">ابدأ</button>
+  </div>
+</div>
+
+<div id="choiceScreen" style="display:none;">
+  <div id="infoBox">
+        <button onclick="goToPart1()">PART 1</button>
+    <button onclick="goToPart2()">PART 2</button>
+    <button onclick="goToPart3()">PART 3</button>
+  </div>
+</div>
+
+<script>
+
+document.getElementById("startBtn").addEventListener("click", function () {
+  document.getElementById("welcomeScreen").style.display = "none";
+  document.getElementById("choiceScreen").style.display = "block";
+});
+
+function goToPart1() {
+  window.location.href = "story.html";
+}
+
+function goToPart2() {
+  window.location.href = "part2.html";
+}
+
+function goToPart3() {
+  window.location.href = "part3.html";
+}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>part 2</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0d0d12;
+    color: #f2f2f2;
+    font-family: Tahoma, Arial;
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 650px;
+    background-color: #1a1a26;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.scene {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    animation: fade 0.6s ease;
+}
+
+p {
+    font-size: 17px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+    animation: fade 0.6s ease;
+}
+
+/* ===== تأثير الأزرار ===== */
+button {
+    padding: 12px 26px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #6c8ebf, #4f6fa5);
+    color: #fff;
+    font-weight: bold;
+    transition: 0.25s ease, transform 0.2s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  }
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+    background: linear-gradient(135deg, #5a7fb3, #3b5f8f);
+}
+
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4) inset;
+    background: linear-gradient(135deg, #4f6fa5, #3b5f8f);
+}
+
+.btn-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.btn-text {
+    display: inline-block;
+}
+
+/* تأثير fade */
+@keyframes fade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<img id="scene" class="scene" src="">
+
+    <p id="text">كيف كانت اخر نهايه وصلت لها ؟</p>
+
+    <div id="choices">
+        <button onclick="first()">
+            <img src="phone3.png" class="btn-img" alt="">
+            <span class="btn-text">تلعب لعبه</span>
+        </button>
+
+        <button onclick="sec()">
+            <img src="room2.png" class="btn-img" alt="">
+            <span class="btn-text">تستيقظ على رساله سنلتقي لاحقا</span>
+        </button>
+
+        <button onclick="third()">
+            <img src="exit.png" class="btn-img" alt="">
+            <span class="btn-text">غادرت المنزل</span>
+        </button>
+    </div>
+</div>
+
+<audio id="bgMusic" src="back.MP3" loop></audio>
+<audio id="clickSound" src="click.mp3"></audio>
+
+<script>
+
+function third() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "غادرت المنزل<br> شعرت بحركه خلفك تستدير بسرعه <br> كان هناك ظل يتحرك بسرعه بالظلام و باب المنزل يصدر صوتا عاليا ";
+
+    document.getElementById("choices").innerHTML = `
+       <button onclick="third1()">تحاول تأمين نفسك </button>
+  <button onclick="police1()">تذهب لمركز الشرطه </button>
+
+    `;
+}
+
+// وظائف النهاية كمثال
+function third1() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "بينما تستمر بالسير كان  العالم بأكمله يبدو فارغا <br> وجدت مكان قادر على الاختباء فيه ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="stay1()">تختبئ فيه </button>
+  <button onclick="third2()">تغير مكانك </button>
+
+`;
+}
+function third2() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "تشعر بأصوات حركه خلفك و كأن شخص ما يلاحقك ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="stay1()">تعود لتختبئ في ذلك المكان </button>
+  <button onclick="third3()">تركض هاربا </button>
+
+`;
+}
+
+function third3() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "تجري حتى تشعر بالتعب <br> لازالت الاصوات تتبعك و تقترب اكثر فأكثر ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="stop1()">تتوقف عن الركض </button>
+  <button onclick="third4()">تستمر </button>
+
+`;
+}
+function third4() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "تجري حتى تسقط منهكا عاجز على الحركه و لم تعد تشعر بشيء حتى ظهر ظل امامك <br>تحاول النظر اليه وسط الظلام و لا تقدر  <br>ليصدر هذا الظل صوت مألوف <strong>قلت لك لا تهرب  </strong>";
+
+    document.getElementById("choices").innerHTML = `
+ <button onclick="die()">??</button>
+ 
+
+`;
+}
+function die() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "تغمض عينيك بعد سماعك هذا الصوت .....<br><strong> لقد متت !!</strong>";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="window.location.href='story.html'">عوده للبدايه </button>
+  
+
+`;
+}
+function stop1() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "تتوقف بينما انت منهك <br>كان الصوت يقترب ثم فجأه <br><strong>تتلقى ضربه على رأسك بقوه </strong>";
+ 
+    document.getElementById("choices").innerHTML = `
+ <button onclick="die2()">؟؟</button>
+ 
+
+`;
+}
+function die2() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "مع سقوطك من قوة الضربه فقدت كل احاسيسك للحظه حتى تسمع صوت <br><strong>اخبرتك لا تحاول الهروب !! </strong>لقد متت ";    document.getElementById("choices").innerHTML = `
+ <button onclick="window.location.href='story.html'">تعود للبدايه </button>
+  
+
+`;
+}
+
+function stay1() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "تبقى جالسا بالمكان <br>كان الهدوء مخيفاََ استمر لساعات حتى شعرت بجوعِِ كبير  ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="die3()">تبقى في مكانك مستسلم لقدرك </button>
+  <button onclick="stay2()">تذهب لتبحث على غذاء </button>
+
+`;
+}
+function die3() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "تبقى في مكانك حتى يزيد جوعك و عطشك لدرجه يغمى عليك <br><br><br> لقد متت ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="window.location.href='story.html'">عوده للبدايه</button>
+
+
+`;
+}
+function stay2() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">     </button>
+  <button onclick="sleep()">      </button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+ function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+function escape() {
+ document.getElementById("scene").src = "صوره.png";
+
+    document.getElementById("text").innerHTML = "       ";
+    document.getElementById("choices").innerHTML = `
+ <button onclick="sleep()">تذهب لتنام</button>
+  <button onclick="sleep()">تذهب لتنام</button>
+
+`;
+}
+
+
+
+
+
+
+ 
+
+
+
+
+
+  
+
+
+
+
+
+// صوت عند النقر على أي زر
+document.body.addEventListener("click", (e) => {
+    let btn = e.target.closest("button");
+    if (btn) {
+        const clickSound = document.getElementById("clickSound");
+        clickSound.currentTime = 0;
+        clickSound.play();
+    }
+});
+
+// تشغيل موسيقى الخلفية عند أول نقرة
+let bgStarted = false;
+document.body.addEventListener("click", () => {
+    const bgMusic = document.getElementById("bgMusic");
+    if (!bgStarted) {
+        bgMusic.play();
+        bgStarted = true;
+    }
+});
+</script>
+
+</body>
+</html>
