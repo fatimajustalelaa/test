@@ -92,7 +92,7 @@ button:active {
     </div>
 </div>
 
-<audio id="bgMusic" src="back.mp3" loop ></audio>
+<audio id="bgMusic" src="back.mp3" loop muted></audio>
 <audio id="clickSound" src="click.mp3"></audio>
 
 <script>
@@ -582,7 +582,8 @@ let bgStarted = false;
 document.body.addEventListener("click", () => {
     const bgMusic = document.getElementById("bgMusic");
     if (!bgStarted) {
-        bgMusic.play();
+        bgMusic.muted = false;   // ← تضيفين هذا السطر
+        bgMusic.play();          // ← هذا موجود، خليه
         bgStarted = true;
     }
 });
@@ -590,5 +591,6 @@ document.body.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
